@@ -26,13 +26,6 @@ export class UsersController {
     return this.userService.user({ id: Number(id) });
   }
 
-  @Get('signin')
-  async signIn(
-    @Body() userData: Prisma.UserWhereUniqueInput,
-  ): Promise<UserModel | null> {
-    return this.userService.user(userData);
-  }
-
   @Patch(':id')
   async updateUser(
     @Param('id') id: string,

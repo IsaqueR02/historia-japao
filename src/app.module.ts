@@ -8,9 +8,10 @@ import { CharactersController } from './characters/character.controller';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/user.module';
 import { DatabaseModule } from './database/database.module';
+import { QuestionsModule } from './questions/questions.module';
 
 @Module({
-  imports: [Period, Character, TimeEvent, AuthModule, UserModule, DatabaseModule],
+  imports: [Period, Character, TimeEvent, AuthModule, UserModule, DatabaseModule, QuestionsModule],
   controllers: [PeriodsController, TimeEventsController, CharactersController],
   providers: [],
 })

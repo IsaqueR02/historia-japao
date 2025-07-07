@@ -5,9 +5,12 @@ import { TimeEvent } from './timeevents/timeevent.module';
 import { PeriodsController } from './periods/period.controller';
 import { TimeEventsController } from './timeevents/timeevent.controller';
 import { CharactersController } from './characters/character.controller';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './users/user.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [Period, Character, TimeEvent],
+  imports: [Period, Character, TimeEvent, AuthModule, UserModule, DatabaseModule],
   controllers: [PeriodsController, TimeEventsController, CharactersController],
   providers: [],
 })

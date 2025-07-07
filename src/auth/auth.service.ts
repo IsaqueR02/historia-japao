@@ -17,7 +17,7 @@ export class AuthService {
     const user = await this.userService.user({ email: params.email});
     if (!user) throw new NotFoundException('User Not Found');
     const passwordMatch = await bcrypt.compare(params.passwords, user.passwords);
-    if (!passwordMatch) throw new UnauthorizedException('Invalid redentials')
+    if (!passwordMatch) throw new UnauthorizedException('Invalid credentials')
 
     const payload = { sub: user.id}
       

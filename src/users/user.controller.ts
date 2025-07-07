@@ -6,9 +6,11 @@ import {
   Body, 
   Patch, 
   Param, 
-  Delete
+  Delete,
+  UseGuards
  } from '@nestjs/common';
 import { UserService } from './user.service';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('user')
 export class UsersController {
@@ -21,11 +23,13 @@ export class UsersController {
     return this.userService.createUser(userData);
   }
 
+  @UseGuards(AuthGuard)
   @Get(':id')
   async getUser(@Param('id') id: string): Promise<UserModel | null> {
     return this.userService.user({ id: Number(id) });
   }
 
+  @UseGuards(AuthGuard)
   @Patch(':id')
   async updateUser(
     @Param('id') id: string,
@@ -37,6 +41,7 @@ export class UsersController {
     });
   }
 
+  @UseGuards(AuthGuard) 
   @Delete(':id')
   async deleteUser(@Param('id') id: string): Promise<UserModel> {
     return this.userService.deleteUser({ id: Number(id) });

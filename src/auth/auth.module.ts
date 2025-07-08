@@ -4,12 +4,16 @@ import { AuthService } from './auth.service';
 import { UserModule } from 'src/users/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from './auth.guard';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
-  imports: [forwardRef(() => UserModule), JwtModule.register({
+  imports: [
+    DatabaseModule,
+    forwardRef(() => UserModule), 
+    JwtModule.register({
       global: true,
       secret: process.env.SECRET_KEY || '',
-      signOptions: { expiresIn: '180s' },
+      signOptions: { expiresIn: '12000s' },
     }),
   ],
   controllers: [AuthController],

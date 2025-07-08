@@ -10,7 +10,7 @@ export class AnswersService {
 
   create(createAnswerDto: CreateAnswerDto, userId: any, questionId: number) {
     const newAnswer = {
-      body: createAnswerDto.body,
+      content: createAnswerDto.content,
       user: {
         connect: { id: userId.sub },
       },
@@ -18,27 +18,27 @@ export class AnswersService {
         connect: { id: questionId },
       },
     };
-    return this.prisma.answers.create({
+    return this.prisma.answer.create({
       data: newAnswer,
     });
   }
 
   findAll() {
-    return this.prisma.questions.findMany();
+    return this.prisma.question.findMany();
   }
 
   findOne(id: number) {
-    return this.prisma.questions.findUnique({ where: { id } });
+    return this.prisma.question.findUnique({ where: { id } });
   }
 
   update(id: number, updateAnswerDto: UpdateAnswerDto) {
-    return this.prisma.questions.update({
+    return this.prisma.question.update({
       where: { id },
       data: updateAnswerDto,
     });
   }
 
   remove(id: number) {
-    return this.prisma.questions.delete({ where: { id } });
+    return this.prisma.question.delete({ where: { id } });
   }
 }

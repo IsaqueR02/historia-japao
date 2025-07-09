@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Request } from '@nestjs/common';
 import { CreateAnswerDto } from './dto/create-answer.dto';
 import { UpdateAnswerDto } from './dto/update-answer.dto';
 import { PrismaService } from 'src/database/prisma.service';
@@ -12,7 +12,7 @@ export class AnswersService {
     const newAnswer = {
       content: createAnswerDto.content,
       user: {
-        connect: { id: userId.sub },
+        connect: { id: userId },
       },
       question: {
         connect: { id: questionId },
@@ -38,7 +38,11 @@ export class AnswersService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.prisma.answer.deleteMany({
+      where: { questionId: id },
+    });
+    
     return this.prisma.question.delete({ where: { id } });
   }
 }

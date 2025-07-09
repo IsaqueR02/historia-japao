@@ -10,7 +10,12 @@ export class QuestionsService {
 
   async create(createQuestionDto: CreateQuestionDto, userId: number) {
     return await this.prisma.question.create({
-      data: { ...createQuestionDto, userId},
+      data: { 
+        ...createQuestionDto, 
+        user: { 
+          connect: { id: userId } 
+        } 
+      },
     });
   }
 
@@ -51,6 +56,11 @@ export class QuestionsService {
   }
 
   async remove(id: number) {
-    return this.prisma.question.delete({ where: { id },});
+    await this.prisma.answer.deleteMany({
+      where: { questionId: id },
+    });
+
+    return this.prisma.question.delete({ where: { id }
+    });
   }
 }

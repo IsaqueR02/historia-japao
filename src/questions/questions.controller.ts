@@ -50,8 +50,6 @@ export class QuestionsController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
-    console.log('Request userId:', JSON.stringify(id, null, 2));
-    console.log('Request id:', JSON.stringify(id, null, 2));
     return this.questionsService.remove(id);
   }
 }

@@ -53,7 +53,6 @@ export class AnswersController {
   @Delete(':id')
   @UseGuards(AuthGuard)
   remove(@Param('id') id: string) {
-    console.log('Request userId:', JSON.stringify(id, null, 2));
     return this.answersService.remove(+id);
   }
 }
